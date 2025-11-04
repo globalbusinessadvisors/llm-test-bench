@@ -2,7 +2,7 @@ use anyhow::{Context, Result};
 use clap::Args;
 use colored::Colorize;
 use llm_test_bench_core::config::{Config, ConfigLoader};
-use llm_test_bench_core::providers::ProviderFactory;
+use llm_test_bench_core::providers::{ProviderFactory, CompletionRequest};
 use llm_test_bench_datasets::loader::DatasetLoader;
 use serde::{Deserialize, Serialize};
 use std::path::PathBuf;
@@ -210,7 +210,17 @@ async fn run_single_comparison(
             .context(format!("Failed to create provider: {}", provider_name))?;
 
         // Execute request
-        let result = match provider.complete(prompt, model_name).await {
+        let request = CompletionRequest {
+            model: model_name.to_string(),
+            prompt: prompt.to_string(),
+            max_tokens: Some(1000),
+            temperature: Some(0.7),
+            top_p: None,
+            stop: None,
+            stream: false,
+        };
+
+        let result = match provider.complete(request).await {
             Ok(response) => {
                 let duration = start.elapsed();
                 println!("{} ({:.0}ms)", "✓".green(), duration.as_millis());
@@ -218,7 +228,7 @@ async fn run_single_comparison(
                 ComparisonResult {
                     model: model_name.clone(),
                     provider: provider_name.clone(),
-                    response: response.text.clone(),
+                    response: response.content.clone(),
                     duration_ms: duration.as_millis() as u64,
                     tokens_used: Some(response.usage.total_tokens as u64),
                     estimated_cost: calculate_cost(provider_name, model_name, &response.usage),
@@ -294,7 +304,7 @@ async fn run_batch_comparison(
     let mut reports = Vec::new();
 
     for (idx, test_case) in dataset.test_cases.iter().enumerate() {
-        println!("{} Test {}/{}: {}", "▶".cyan().bold(), idx + 1, dataset.test_cases.len(), test_case.name.bold());
+        println!("{} Test {}/{}: {} ({})", "▶".cyan().bold(), idx + 1, dataset.test_cases.len(), test_case.id.bold(), test_case.category.as_deref().unwrap_or("general"));
 
         let report = run_single_comparison(
             &test_case.prompt,
@@ -339,7 +349,7 @@ fn run_statistical_tests(results: &[ComparisonResult]) -> Result<StatisticalTest
     })
 }
 
-fn calculate_cost(provider: &str, model: &str, usage: &llm_test_bench_core::providers::types::Usage) -> f64 {
+fn calculate_cost(provider: &str, model: &str, usage: &llm_test_bench_core::providers::types::TokenUsage) -> f64 {
     // Simplified cost calculation
     // In production, use real pricing from provider configurations
     let (input_cost, output_cost) = match (provider, model) {

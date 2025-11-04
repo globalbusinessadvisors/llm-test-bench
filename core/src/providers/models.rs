@@ -272,7 +272,7 @@ pub fn get_model_metadata(model_id: &str) -> Option<ModelMetadata> {
     match model_id {
         // OpenAI GPT-4o
         GPT_4O | GPT_4O_2024_11_20 => Some(ModelMetadata {
-            id: model_id,
+            id: GPT_4O,
             display_name: "GPT-4o",
             provider: "openai",
             capabilities: ModelCapabilities {
@@ -288,7 +288,7 @@ pub fn get_model_metadata(model_id: &str) -> Option<ModelMetadata> {
 
         // OpenAI GPT-4o-mini
         GPT_4O_MINI | GPT_4O_MINI_2024_07_18 => Some(ModelMetadata {
-            id: model_id,
+            id: GPT_4O_MINI,
             display_name: "GPT-4o-mini",
             provider: "openai",
             capabilities: ModelCapabilities {
@@ -304,7 +304,7 @@ pub fn get_model_metadata(model_id: &str) -> Option<ModelMetadata> {
 
         // Anthropic Claude 3.5 Sonnet
         CLAUDE_3_5_SONNET_LATEST | CLAUDE_3_5_SONNET_20241022 | CLAUDE_3_5_SONNET_20240620 => Some(ModelMetadata {
-            id: model_id,
+            id: CLAUDE_3_5_SONNET_LATEST,
             display_name: "Claude 3.5 Sonnet",
             provider: "anthropic",
             capabilities: ModelCapabilities {
@@ -320,7 +320,7 @@ pub fn get_model_metadata(model_id: &str) -> Option<ModelMetadata> {
 
         // Anthropic Claude 3.5 Haiku
         CLAUDE_3_5_HAIKU_LATEST | CLAUDE_3_5_HAIKU_20241022 => Some(ModelMetadata {
-            id: model_id,
+            id: CLAUDE_3_5_HAIKU_LATEST,
             display_name: "Claude 3.5 Haiku",
             provider: "anthropic",
             capabilities: ModelCapabilities {
@@ -336,7 +336,7 @@ pub fn get_model_metadata(model_id: &str) -> Option<ModelMetadata> {
 
         // Google Gemini 2.0 Flash
         GEMINI_2_0_FLASH_EXP => Some(ModelMetadata {
-            id: model_id,
+            id: GEMINI_2_0_FLASH_EXP,
             display_name: "Gemini 2.0 Flash",
             provider: "google",
             capabilities: ModelCapabilities {
@@ -352,7 +352,7 @@ pub fn get_model_metadata(model_id: &str) -> Option<ModelMetadata> {
 
         // Google Gemini 1.5 Pro
         GEMINI_1_5_PRO | GEMINI_1_5_PRO_LATEST | GEMINI_1_5_PRO_002 => Some(ModelMetadata {
-            id: model_id,
+            id: GEMINI_1_5_PRO,
             display_name: "Gemini 1.5 Pro",
             provider: "google",
             capabilities: ModelCapabilities {

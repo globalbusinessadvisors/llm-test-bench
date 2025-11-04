@@ -48,7 +48,7 @@ pub struct OptimizeArgs {
     pub config: Option<PathBuf>,
 }
 
-#[derive(Debug, Clone, clap::ValueEnum)]
+#[derive(Debug, Clone, PartialEq, clap::ValueEnum)]
 pub enum OutputFormat {
     Detailed,
     Summary,

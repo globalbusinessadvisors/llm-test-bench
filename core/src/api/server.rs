@@ -25,7 +25,7 @@ use crate::api::{
     auth::AuthService,
     middleware::CorsConfig,
     rest::RestApi,
-    graphql::GraphQLApi,
+    graphql::{GraphQLApi, Query, Mutation},
     websocket::{ws_router, WsState},
 };
 
@@ -199,8 +199,7 @@ impl ApiServer {
         // REST API
         if self.config.enable_rest {
             info!("Enabling REST API at /v1/*");
-            let rest_router = RestApi::router::<AppState>()
-                .with_state(self.state.clone());
+            let rest_router = RestApi::router::<AppState>();
             app = app.merge(rest_router);
         }
 
@@ -214,7 +213,7 @@ impl ApiServer {
         // WebSocket API
         if self.config.enable_websocket {
             info!("Enabling WebSocket API at /ws");
-            let ws_router = ws_router::<AppState>()
+            let ws_router = ws_router::<Arc<WsState>>()
                 .with_state(self.state.ws_state.clone());
             app = app.merge(ws_router);
         }
@@ -225,31 +224,22 @@ impl ApiServer {
             app = app.merge(self.build_swagger_router());
         }
 
-        // Add middleware layers
+        // Add middleware layers then set state
         app = app.layer(
             ServiceBuilder::new()
                 .layer(TraceLayer::new_for_http())
                 .layer(CompressionLayer::new())
                 .layer(self.config.cors.to_layer())
-                .layer(Extension(self.state.clone()))
         );
 
-        app
+        app.with_state(self.state.clone())
     }
 
     /// Build GraphQL router
-    fn build_graphql_router(&self) -> Router {
-        use async_graphql_axum::{GraphQLRequest, GraphQLResponse};
+    fn build_graphql_router(&self) -> Router<Arc<AppState>> {
         use async_graphql::http::GraphiQLSource;
 
         let schema = self.state.graphql_schema.clone();
-
-        async fn graphql_handler(
-            schema: axum::extract::Extension<async_graphql::Schema<QueryRoot, EmptyMutation, EmptySubscription>>,
-            req: GraphQLRequest,
-        ) -> GraphQLResponse {
-            schema.execute(req.into_inner()).await.into()
-        }
 
         async fn graphiql_handler() -> axum::response::Html<String> {
             axum::response::Html(
@@ -260,13 +250,27 @@ impl ApiServer {
         }
 
         Router::new()
-            .route("/", axum::routing::post(graphql_handler))
+            .route("/", axum::routing::post({
+                let schema = schema.clone();
+                move |axum::extract::State(_state): axum::extract::State<Arc<AppState>>, body: String| {
+                    let schema = schema.clone();
+                    async move {
+                        let request = match serde_json::from_str::<async_graphql::Request>(&body) {
+                            Ok(req) => req,
+                            Err(e) => return axum::Json(async_graphql::Response::from_errors(vec![
+                                async_graphql::ServerError::new(format!("Invalid GraphQL request: {}", e), None)
+                            ])),
+                        };
+                        let response = schema.execute(request).await;
+                        axum::Json(response)
+                    }
+                }
+            }))
             .route("/", axum::routing::get(graphiql_handler))
-            .layer(axum::extract::Extension(schema))
     }
 
     /// Build Swagger UI router
-    fn build_swagger_router(&self) -> Router {
+    fn build_swagger_router(&self) -> Router<Arc<AppState>> {
         use utoipa::OpenApi;
         use utoipa_swagger_ui::SwaggerUi;
 

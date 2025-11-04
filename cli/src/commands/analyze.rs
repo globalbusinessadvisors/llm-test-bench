@@ -44,7 +44,7 @@ pub struct AnalyzeArgs {
     pub config: Option<PathBuf>,
 }
 
-#[derive(Debug, Clone, clap::ValueEnum)]
+#[derive(Debug, Clone, PartialEq, clap::ValueEnum)]
 pub enum OutputFormat {
     Detailed,
     Summary,
@@ -136,8 +136,12 @@ pub async fn execute(args: AnalyzeArgs, verbose: bool) -> Result<()> {
     println!("{} Loading results...", "▶".green());
     let baseline_data = load_results(&args.baseline)?;
     let comparison_data = load_results(&args.comparison)?;
-    println!("  {} Baseline: {} tests", "✓".green(), baseline_data.total_tests);
-    println!("  {} Comparison: {} tests", "✓".green(), comparison_data.total_tests);
+
+    let baseline_count = baseline_data.as_array().map(|a| a.len()).unwrap_or(0);
+    let comparison_count = comparison_data.as_array().map(|a| a.len()).unwrap_or(0);
+
+    println!("  {} Baseline: {} tests", "✓".green(), baseline_count);
+    println!("  {} Comparison: {} tests", "✓".green(), comparison_count);
     println!();
 
     // Extract metric values

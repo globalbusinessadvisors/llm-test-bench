@@ -5,9 +5,10 @@
 **A comprehensive, production-ready framework for benchmarking, testing, and evaluating Large Language Models**
 
 [![CI](https://img.shields.io/github/actions/workflow/status/globalbusinessadvisors/llm-test-bench/llm-benchmark.yml?branch=main&label=CI&logo=github)](https://github.com/globalbusinessadvisors/llm-test-bench/actions)
+[![Crates.io](https://img.shields.io/crates/v/llm-test-bench?logo=rust)](https://crates.io/crates/llm-test-bench)
+[![npm](https://img.shields.io/npm/v/llm-test-bench?logo=npm)](https://www.npmjs.com/package/llm-test-bench)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Rust Version](https://img.shields.io/badge/rust-1.75%2B-blue.svg)](https://www.rust-lang.org)
-[![Crates.io](https://img.shields.io/badge/crates.io-v0.1.0-orange)](https://crates.io)
 
 [Features](#-features) • [Quick Start](#-quick-start) • [Documentation](#-documentation) • [Architecture](#-architecture) • [Contributing](#-contributing)
 
@@ -129,24 +130,44 @@ voxtral-small, voxtral-small-20250701
 
 ## 🚀 Quick Start
 
-### Prerequisites
-
-- **Rust**: 1.75.0 or later ([Install Rust](https://rustup.rs/))
-- **API Keys**: At least one LLM provider API key
-
 ### Installation
+
+#### Option 1: Install via Cargo (Recommended)
+
+```bash
+# Install from crates.io
+cargo install llm-test-bench
+
+# Verify installation
+llm-test-bench --version
+```
+
+#### Option 2: Install via npm
+
+```bash
+# Install globally
+npm install -g llm-test-bench
+
+# Or use with npx (no installation required)
+npx llm-test-bench --help
+```
+
+#### Option 3: Build from Source
 
 ```bash
 # Clone the repository
 git clone https://github.com/globalbusinessadvisors/llm-test-bench.git
 cd llm-test-bench
 
-# Build the project
-cargo build --release
-
-# Install CLI globally (optional)
+# Build and install
 cargo install --path cli
 ```
+
+### Prerequisites
+
+- **For Cargo**: Rust 1.75.0 or later ([Install Rust](https://rustup.rs/))
+- **For npm**: Node.js 14.0.0+ and Rust ([Install Node](https://nodejs.org/), [Install Rust](https://rustup.rs/))
+- **API Keys**: At least one LLM provider API key
 
 ### Configuration
 

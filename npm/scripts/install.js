@@ -1,142 +1,77 @@
 #!/usr/bin/env node
 
-const fs = require('fs');
-const path = require('path');
-const https = require('https');
-const { promisify } = require('util');
-const { pipeline } = require('stream');
-const { createWriteStream, createReadStream } = require('fs');
-const { execSync } = require('child_process');
+const { spawnSync } = require('child_process');
+const { existsSync } = require('fs');
+const { join } = require('path');
+const os = require('os');
 
-const streamPipeline = promisify(pipeline);
-
-// Determine platform and architecture
-const platform = process.platform;
-const arch = process.arch;
-
-// Map Node.js platform names to Rust target names
-const PLATFORM_MAPPING = {
-  darwin: 'apple-darwin',
-  linux: 'unknown-linux-gnu',
-  win32: 'pc-windows-msvc',
-};
-
-const ARCH_MAPPING = {
-  x64: 'x86_64',
-  arm64: 'aarch64',
-};
-
-// Get the binary name
-function getBinaryName() {
-  const ext = platform === 'win32' ? '.exe' : '';
-  return `llm-test-bench${ext}`;
+function checkCargo() {
+  const result = spawnSync('cargo', ['--version'], { encoding: 'utf8' });
+  return result.status === 0;
 }
 
-// Get the target triple
-function getTarget() {
-  const platformName = PLATFORM_MAPPING[platform];
-  const archName = ARCH_MAPPING[arch];
-
-  if (!platformName || !archName) {
-    throw new Error(`Unsupported platform: ${platform}-${arch}`);
-  }
-
-  return `${archName}-${platformName}`;
-}
-
-// Get download URL
-function getDownloadUrl(version) {
-  const target = getTarget();
-  const ext = platform === 'win32' ? '.exe' : '';
-
-  // Using GitHub releases - binaries are named with target triple
-  return `https://github.com/globalbusinessadvisors/llm-test-bench/releases/download/v${version}/llm-test-bench-${target}${ext}`;
-}
-
-// Download file
-async function download(url, dest) {
-  console.log(`Downloading from: ${url}`);
-  console.log(`Saving to: ${dest}`);
-
-  return new Promise((resolve, reject) => {
-    https.get(url, (response) => {
-      if (response.statusCode === 302 || response.statusCode === 301) {
-        // Follow redirect
-        return download(response.headers.location, dest).then(resolve).catch(reject);
-      }
-
-      if (response.statusCode !== 200) {
-        reject(new Error(`Download failed with status ${response.statusCode}`));
-        return;
-      }
-
-      const fileStream = createWriteStream(dest);
-      response.pipe(fileStream);
-
-      fileStream.on('finish', () => {
-        fileStream.close();
-        resolve();
-      });
-
-      fileStream.on('error', (err) => {
-        fs.unlink(dest, () => reject(err));
-      });
-    }).on('error', reject);
+function installFromCrates() {
+  console.log('Installing llm-test-bench from crates.io...');
+  console.log('This may take a few minutes on first install.\n');
+  
+  const result = spawnSync('cargo', ['install', 'llm-test-bench', '--version', '0.1.0'], {
+    stdio: 'inherit',
+    shell: process.platform === 'win32'
   });
-}
-
-// Make file executable
-function makeExecutable(filePath) {
-  if (platform !== 'win32') {
-    fs.chmodSync(filePath, 0o755);
+  
+  if (result.status !== 0) {
+    console.error('\nFailed to install llm-test-bench from crates.io');
+    console.error('Error code:', result.status);
+    return false;
   }
+  
+  console.log('\nSuccessfully installed llm-test-bench!');
+  return true;
 }
 
-// Main installation
-async function install() {
-  try {
-    const packageJson = require('../package.json');
-    const version = packageJson.version;
+function checkExistingInstall() {
+  const cargoHome = process.env.CARGO_HOME || join(os.homedir(), '.cargo');
+  const binaryName = process.platform === 'win32' ? 'llm-test-bench.exe' : 'llm-test-bench';
+  const binaryPath = join(cargoHome, 'bin', binaryName);
+  
+  if (existsSync(binaryPath)) {
+    console.log('llm-test-bench is already installed at:', binaryPath);
+    console.log('Skipping installation. Run "npm rebuild" to reinstall.');
+    return true;
+  }
+  
+  return false;
+}
 
-    // Create bin directory
-    const binDir = path.join(__dirname, '..', 'bin');
-    if (!fs.existsSync(binDir)) {
-      fs.mkdirSync(binDir, { recursive: true });
-    }
-
-    const binaryName = getBinaryName();
-    const binaryPath = path.join(binDir, binaryName);
-
-    // Check if binary already exists
-    if (fs.existsSync(binaryPath)) {
-      console.log('Binary already installed.');
-      makeExecutable(binaryPath);
-      return;
-    }
-
-    console.log(`Installing LLM Test Bench v${version} for ${platform}-${arch}...`);
-
-    // Try to download from GitHub releases
-    try {
-      const downloadUrl = getDownloadUrl(version);
-      await download(downloadUrl, binaryPath);
-      makeExecutable(binaryPath);
-      console.log('✓ Installation successful!');
-      console.log(`\nRun 'llm-test-bench --help' to get started.`);
-    } catch (error) {
-      console.error('Failed to download pre-built binary:', error.message);
-      console.log('\n⚠️  Pre-built binary not available for your platform.');
-      console.log('Please install from source using Cargo:');
-      console.log('  cargo install llm-test-bench');
-      console.log('\nOr download manually from:');
-      console.log('  https://github.com/globalbusinessadvisors/llm-test-bench/releases');
-      process.exit(1);
-    }
-  } catch (error) {
-    console.error('Installation failed:', error);
+function main() {
+  // Check if already installed
+  if (checkExistingInstall()) {
+    return;
+  }
+  
+  // Check if cargo is available
+  if (!checkCargo()) {
+    console.error('Error: Cargo (Rust toolchain) is not installed.');
+    console.error('');
+    console.error('To use llm-test-bench, you need to install Rust:');
+    console.error('  https://rustup.rs/');
+    console.error('');
+    console.error('After installing Rust, run:');
+    console.error('  npm rebuild llm-test-bench');
+    console.error('');
+    process.exit(1);
+  }
+  
+  // Install from crates.io
+  const success = installFromCrates();
+  if (!success) {
     process.exit(1);
   }
 }
 
-// Run installation
-install();
+// Only run if not in CI environment (allows for optional dependencies)
+if (!process.env.CI && process.env.npm_config_optional !== 'false') {
+  main();
+} else {
+  console.log('Skipping llm-test-bench installation in CI environment.');
+}

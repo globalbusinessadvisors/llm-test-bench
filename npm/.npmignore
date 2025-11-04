@@ -1,30 +1,34 @@
-# Source files (we only distribute binaries)
-src/
-target/
-Cargo.toml
-Cargo.lock
-
 # Development files
-.git/
-.github/
-.vscode/
-.idea/
+*.log
 *.swp
 *.swo
 *~
+.DS_Store
+.env
+.vscode/
+.idea/
 
 # Test files
+test/
 tests/
 *.test.js
+*.spec.js
 
-# Documentation (included in README)
-docs/
+# Build artifacts
+target/
+dist/
+build/
+node_modules/
 
-# CI/CD
+# Git
+.git/
+.gitignore
+
+# CI
+.github/
 .travis.yml
-.gitlab-ci.yml
-azure-pipelines.yml
+.circleci/
 
-# OS files
-.DS_Store
-Thumbs.db
+# Misc
+TODO.md
+CHANGELOG.md
