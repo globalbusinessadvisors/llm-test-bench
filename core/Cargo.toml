@@ -87,7 +87,7 @@ utoipa = { version = "4.2", features = ["axum_extras"] }  # OpenAPI documentatio
 utoipa-swagger-ui = { version = "6.0", features = ["axum"] }  # Swagger UI
 jsonwebtoken = "9.2"  # JWT authentication
 bcrypt = "0.15"  # Password hashing
-tower-governor = "0.3"  # Rate limiting
+tower_governor = "0.4"  # Rate limiting
 uuid = { version = "1.7", features = ["v4", "serde"] }  # UUID generation
 
 # Distributed architecture
