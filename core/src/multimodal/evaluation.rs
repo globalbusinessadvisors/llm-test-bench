@@ -121,13 +121,13 @@ impl VisionEvaluator {
 
     fn calculate_description_similarity(&self, response: &str, truth: &str) -> f64 {
         // Simple word overlap metric (production would use BLEU, ROUGE, etc.)
-        let response_words: std::collections::HashSet<_> = response
-            .to_lowercase()
+        let response_lower = response.to_lowercase();
+        let response_words: std::collections::HashSet<_> = response_lower
             .split_whitespace()
             .collect();
 
-        let truth_words: std::collections::HashSet<_> = truth
-            .to_lowercase()
+        let truth_lower = truth.to_lowercase();
+        let truth_words: std::collections::HashSet<_> = truth_lower
             .split_whitespace()
             .collect();
 

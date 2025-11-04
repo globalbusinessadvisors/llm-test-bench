@@ -247,7 +247,7 @@ impl Coordinator {
         let job = self.jobs.get(&request.job_id)?;
 
         Some(JobStatusResponse {
-            job_id: job.id,
+            job_id: job.id.clone(),
             status: job.status.to_string(),
             progress: job.progress(),
             result: job.result,
@@ -326,9 +326,10 @@ impl Coordinator {
             }
         }
 
+        let task_count = tasks.len();
         PullTaskResponse {
             tasks,
-            message: format!("Assigned {} tasks", tasks.len()),
+            message: format!("Assigned {} tasks", task_count),
         }
     }
 
@@ -384,7 +385,7 @@ impl Coordinator {
             .into_iter()
             .map(|w| WorkerSummary {
                 worker_id: w.id,
-                address: w.address,
+                address: w.address.clone(),
                 status: w.status.to_string(),
                 current_tasks: w.current_tasks,
                 capacity: w.capacity,
