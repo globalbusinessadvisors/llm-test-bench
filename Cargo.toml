@@ -22,8 +22,12 @@ version = "0.1.0"
 edition = "2021"
 authors = ["LLM Test Bench Contributors"]
 license = "MIT OR Apache-2.0"
-repository = "https://github.com/llm-test-bench/llm-test-bench"
-homepage = "https://github.com/llm-test-bench/llm-test-bench"
+repository = "https://github.com/globalbusinessadvisors/llm-test-bench"
+homepage = "https://github.com/globalbusinessadvisors/llm-test-bench"
+documentation = "https://docs.rs/llm-test-bench"
+readme = "README.md"
+keywords = ["llm", "benchmark", "testing", "ai", "gpt"]
+categories = ["command-line-utilities", "development-tools::testing", "science"]
 rust-version = "1.75.0"
 
 [workspace.dependencies]

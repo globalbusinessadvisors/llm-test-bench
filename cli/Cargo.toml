@@ -6,8 +6,12 @@ authors.workspace = true
 license.workspace = true
 repository.workspace = true
 homepage.workspace = true
+documentation.workspace = true
+keywords.workspace = true
+categories.workspace = true
 rust-version.workspace = true
-description = "A production-grade CLI for testing and benchmarking LLM applications"
+description = "A production-grade CLI for testing and benchmarking LLM applications with support for GPT-5, Claude Opus 4, Gemini 2.5, and 65+ models"
+readme = "../README.md"
 
 [[bin]]
 name = "llm-test-bench"
@@ -15,8 +19,8 @@ path = "src/main.rs"
 
 [dependencies]
 # Workspace crates
-llm-test-bench-core = { path = "../core" }
-llm-test-bench-datasets = { path = "../datasets" }
+llm-test-bench-core = { version = "0.1.0", path = "../core" }
+llm-test-bench-datasets = { version = "0.1.0", path = "../datasets" }
 
 # CLI framework
 clap = { workspace = true }

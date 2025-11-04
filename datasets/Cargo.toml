@@ -12,10 +12,12 @@ authors.workspace = true
 license.workspace = true
 repository.workspace = true
 homepage.workspace = true
+documentation.workspace = true
 rust-version.workspace = true
-description = "Dataset management for LLM Test Bench"
-keywords = ["llm", "testing", "datasets", "benchmarking"]
-categories = ["development-tools::testing"]
+description = "Dataset management and utilities for LLM Test Bench - load, validate, and manage test datasets"
+keywords = ["llm", "testing", "datasets", "benchmarking", "validation"]
+categories = ["development-tools::testing", "science"]
+readme = "../README.md"
 
 [dependencies]
 # Serialization

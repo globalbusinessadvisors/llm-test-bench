@@ -6,8 +6,12 @@ license.workspace = true
 authors.workspace = true
 repository.workspace = true
 homepage.workspace = true
+documentation.workspace = true
+keywords.workspace = true
+categories.workspace = true
 rust-version.workspace = true
-description = "Core library for LLM Test Bench - business logic and provider integrations"
+description = "Core library for LLM Test Bench - comprehensive testing framework for Large Language Models with 65+ supported models across 14+ providers"
+readme = "../README.md"
 
 [dependencies]
 # Async runtime
