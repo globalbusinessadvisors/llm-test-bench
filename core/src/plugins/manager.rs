@@ -14,8 +14,11 @@ use parking_lot::RwLock;
 use chrono::Utc;
 
 use crate::plugins::{
-    types::*,
-    api::*,
+    types::{
+        PluginError, PluginInfo, PluginInput, PluginOutput, PluginManifest,
+        PluginMetadata, PluginType, PluginStatus, PluginCapability, ResourceLimits,
+    },
+    api::{PluginApi, PluginHooks},
     runtime::{WasmRuntime, RuntimeConfig, WasmInstance},
     loader::PluginLoader,
 };

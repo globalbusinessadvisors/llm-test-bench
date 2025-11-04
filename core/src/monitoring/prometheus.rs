@@ -12,6 +12,7 @@ use prometheus::{
     TextEncoder, Encoder, HistogramOpts,
 };
 use std::sync::Arc;
+use std::net::SocketAddr;
 use parking_lot::RwLock;
 use axum::{
     routing::get,
@@ -250,7 +251,7 @@ impl PrometheusExporter {
         let app = Router::new()
             .route("/metrics", get(move || Self::metrics_handler(registry.clone())));
 
-        let addr = format!("0.0.0.0:{}", port).parse()?;
+        let addr: SocketAddr = format!("0.0.0.0:{}", port).parse()?;
         tracing::info!("Starting Prometheus exporter on {}", addr);
 
         let server = tokio::spawn(async move {

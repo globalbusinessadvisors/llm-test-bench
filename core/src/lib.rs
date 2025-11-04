@@ -68,6 +68,7 @@ pub mod prelude {
         Coordinator, CoordinatorConfig, Worker, WorkerConfig,
         JobRequest, JobStatus, ClusterMetrics,
     };
+    #[cfg(feature = "database")]
     pub use crate::database::{
         Database, DatabaseConfig, DatabaseError, DatabaseResult,
     };

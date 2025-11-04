@@ -81,7 +81,7 @@ wasmtime-wasi = "19.0"  # WASI support for plugins
 serde_bytes = "0.11"  # Efficient byte serialization for plugin communication
 
 # API server
-async-graphql = "7.0"  # GraphQL implementation
+async-graphql = { version = "7.0", features = ["chrono"] }  # GraphQL implementation
 async-graphql-axum = "7.0"  # GraphQL integration with Axum
 utoipa = { version = "4.2", features = ["axum_extras"] }  # OpenAPI documentation
 utoipa-swagger-ui = { version = "6.0", features = ["axum"] }  # Swagger UI

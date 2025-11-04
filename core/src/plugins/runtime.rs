@@ -8,7 +8,7 @@
 
 use anyhow::{Result, Context, bail};
 use wasmtime::*;
-use wasmtime_wasi::{WasiCtx, WasiCtxBuilder};
+use wasmtime_wasi::{WasiCtx, WasiCtxBuilder, ResourceTable, WasiView};
 use std::sync::Arc;
 use parking_lot::Mutex;
 
@@ -116,7 +116,7 @@ impl WasmRuntime {
 
         // Add WASI to linker if enabled
         if self.config.enable_wasi {
-            wasmtime_wasi::add_to_linker(&mut linker, |s: &mut StoreData| &mut s.wasi_ctx)
+            wasmtime_wasi::command::add_to_linker::<StoreData>(&mut linker)
                 .context("Failed to add WASI to linker")?;
         }
 
@@ -149,6 +149,7 @@ impl WasmRuntime {
 
         let data = StoreData {
             wasi_ctx: wasi,
+            table: ResourceTable::new(),
             limits: StoreLimits::default(),
         };
 
@@ -171,7 +172,18 @@ impl WasmRuntime {
 /// Store data with WASI context and limits
 struct StoreData {
     wasi_ctx: WasiCtx,
+    table: ResourceTable,
     limits: StoreLimits,
+}
+
+impl WasiView for StoreData {
+    fn table(&mut self) -> &mut ResourceTable {
+        &mut self.table
+    }
+
+    fn ctx(&mut self) -> &mut WasiCtx {
+        &mut self.wasi_ctx
+    }
 }
 
 /// Store limits

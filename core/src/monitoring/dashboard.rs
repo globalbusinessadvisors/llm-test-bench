@@ -8,6 +8,7 @@
 
 use anyhow::Result;
 use std::sync::Arc;
+use std::net::SocketAddr;
 use parking_lot::RwLock;
 use tokio::task::JoinHandle;
 use axum::{
@@ -68,7 +69,7 @@ impl Dashboard {
         let app = Router::new()
             .route("/", get(move || dashboard_handler(websocket_url.clone())));
 
-        let addr = format!("0.0.0.0:{}", self.config.port).parse()?;
+        let addr: SocketAddr = format!("0.0.0.0:{}", self.config.port).parse()?;
         tracing::info!("Starting dashboard on http://{}", addr);
 
         let server = tokio::spawn(async move {

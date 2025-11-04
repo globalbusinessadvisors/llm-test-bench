@@ -8,6 +8,7 @@
 
 use anyhow::Result;
 use std::sync::Arc;
+use std::net::SocketAddr;
 use parking_lot::RwLock;
 use tokio::sync::broadcast;
 use tokio::task::JoinHandle;
@@ -106,7 +107,7 @@ impl WebSocketServer {
             .route("/health", get(health_handler))
             .with_state(state);
 
-        let addr = format!("0.0.0.0:{}", self.config.port).parse()?;
+        let addr: SocketAddr = format!("0.0.0.0:{}", self.config.port).parse()?;
         tracing::info!("Starting WebSocket server on {}", addr);
 
         let server = tokio::spawn(async move {
@@ -208,6 +209,7 @@ async fn handle_socket(socket: WebSocket, state: ServerState) {
     });
 
     // Receive messages from client
+    let client_id_clone = client_id.clone();
     let mut recv_task = tokio::spawn(async move {
         while let Some(Ok(msg)) = receiver.next().await {
             match msg {
@@ -215,23 +217,23 @@ async fn handle_socket(socket: WebSocket, state: ServerState) {
                     if let Ok(ws_msg) = serde_json::from_str::<WebSocketMessage>(&text) {
                         match ws_msg {
                             WebSocketMessage::Ping => {
-                                tracing::trace!("Received ping from {}", client_id);
+                                tracing::trace!("Received ping from {}", client_id_clone);
                             }
                             WebSocketMessage::Pong => {
-                                tracing::trace!("Received pong from {}", client_id);
+                                tracing::trace!("Received pong from {}", client_id_clone);
                             }
                             WebSocketMessage::Subscribe { event_types } => {
-                                tracing::debug!("Client {} subscribed to: {:?}", client_id, event_types);
+                                tracing::debug!("Client {} subscribed to: {:?}", client_id_clone, event_types);
                             }
                             WebSocketMessage::Unsubscribe { event_types } => {
-                                tracing::debug!("Client {} unsubscribed from: {:?}", client_id, event_types);
+                                tracing::debug!("Client {} unsubscribed from: {:?}", client_id_clone, event_types);
                             }
                             _ => {}
                         }
                     }
                 }
                 Message::Close(_) => {
-                    tracing::info!("Client {} disconnected", client_id);
+                    tracing::info!("Client {} disconnected", client_id_clone);
                     break;
                 }
                 _ => {}
