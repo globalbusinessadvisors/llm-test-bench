@@ -1,0 +1,64 @@
+{
+  "name": "@llm-test-bench/cli",
+  "version": "0.1.0",
+  "description": "Production-grade CLI for testing and benchmarking LLM applications with support for GPT-5, Claude Opus 4, Gemini 2.5, and 65+ models",
+  "author": "LLM Test Bench Contributors",
+  "license": "MIT OR Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/globalbusinessadvisors/llm-test-bench.git"
+  },
+  "homepage": "https://github.com/globalbusinessadvisors/llm-test-bench",
+  "bugs": {
+    "url": "https://github.com/globalbusinessadvisors/llm-test-bench/issues"
+  },
+  "keywords": [
+    "llm",
+    "benchmark",
+    "testing",
+    "ai",
+    "gpt",
+    "claude",
+    "gemini",
+    "openai",
+    "anthropic",
+    "google",
+    "cli",
+    "evaluation",
+    "performance"
+  ],
+  "bin": {
+    "llm-test-bench": "./bin/llm-test-bench.js",
+    "ltb": "./bin/llm-test-bench.js",
+    "ltb-test": "./bin/test.js",
+    "ltb-bench": "./bin/bench.js",
+    "ltb-eval": "./bin/eval.js",
+    "ltb-compare": "./bin/compare.js",
+    "ltb-dashboard": "./bin/dashboard.js",
+    "ltb-analyze": "./bin/analyze.js",
+    "ltb-optimize": "./bin/optimize.js",
+    "ltb-config": "./bin/config.js"
+  },
+  "scripts": {
+    "postinstall": "node scripts/install.js",
+    "test": "echo \"No tests yet\" && exit 0"
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  },
+  "os": [
+    "darwin",
+    "linux",
+    "win32"
+  ],
+  "cpu": [
+    "x64",
+    "arm64"
+  ],
+  "files": [
+    "bin/",
+    "scripts/",
+    "README.md",
+    "LICENSE"
+  ]
+}
