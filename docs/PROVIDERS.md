@@ -6,10 +6,10 @@ LLM Test Bench provides comprehensive support for **13 LLM providers**, covering
 
 | Provider | Models | Streaming | Context Window | Use Case |
 |----------|--------|-----------|----------------|----------|
-| **OpenAI** | GPT-5, GPT-4.5, GPT-4.1, o3-mini, GPT-4o (29+ models) | ✅ | Up to 128K | Industry-leading quality, reasoning |
-| **Anthropic** | Claude Opus 4, Sonnet 4.5, Sonnet 4, Claude 3.5/3 (17+ models) | ✅ | Up to 200K | Long context, safety-focused |
-| **Google AI** | Gemini 2.5, Gemini 2.0, Gemini 1.5 Pro/Flash (16+ models) | ✅ | Up to 2M | Multimodal, massive context, computer use |
-| **Mistral AI** | Mistral Code, Magistral, Voxtral (7+ models) | ✅ | Varies | Code generation, multilingual, audio |
+| **OpenAI** | GPT-5, GPT-4.5, GPT-4.1, o3-mini, GPT-4o (27 models) | ✅ | Up to 128K | Industry-leading quality, reasoning |
+| **Anthropic** | Claude Opus 4, Sonnet 4.5, Sonnet 4, Claude 3.5/3 (15 models) | ✅ | Up to 200K | Long context, safety-focused |
+| **Google AI** | Gemini 2.5, Gemini 2.0, Gemini 1.5 Pro/Flash (16 models) | ✅ | Up to 2M | Multimodal, massive context, computer use |
+| **Mistral AI** | Mistral Code, Magistral, Voxtral (7 models) | ✅ | Varies | Code generation, multilingual, audio |
 | **Cohere** | Command, Command R/R+ | ✅ | Up to 128K | Enterprise RAG, search |
 | **Azure OpenAI** | GPT-4, GPT-3.5 (Azure-hosted) | ✅ | Up to 128K | Enterprise compliance |
 | **Groq** | Llama 3, Mixtral, Gemma | ✅ | Up to 32K | Ultra-fast inference |
@@ -28,7 +28,7 @@ LLM Test Bench provides comprehensive support for **13 LLM providers**, covering
 
 **Most popular commercial LLM provider with industry-leading models.**
 
-#### Supported Models (29+ models)
+#### Supported Models (27 models)
 
 **GPT-5 Series (Latest Generation - August 2025)**
 - `gpt-5` - Most advanced OpenAI model (Released Aug 7, 2025)
@@ -104,7 +104,7 @@ llm-test-bench compare \
 
 **Safety-focused provider with industry-leading context windows.**
 
-#### Supported Models (17+ models)
+#### Supported Models (15 models)
 
 **Claude Opus 4 (Latest Generation - May 2025)**
 - `claude-opus-4` - Most capable Claude model (Released May 2025)
@@ -162,7 +162,7 @@ llm-test-bench compare \
 
 **Google's multimodal models with massive context windows.**
 
-#### Supported Models (16+ models)
+#### Supported Models (16 models)
 
 **Gemini 2.5 Series (Latest Generation - 2025)**
 - `gemini-2.5-pro` - Most advanced Gemini model (Released 2025)
@@ -221,7 +221,7 @@ llm-test-bench compare \
 
 **French AI company providing open and commercial models with strong code and multilingual capabilities.**
 
-#### Supported Models (7+ models)
+#### Supported Models (7 models)
 
 **Mistral Code (June 2025)**
 - `mistral-code` - Code-specialized model (Released Jun 4, 2025)

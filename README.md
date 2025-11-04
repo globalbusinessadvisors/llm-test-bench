@@ -21,7 +21,7 @@ LLM Test Bench is a powerful, enterprise-grade framework built in Rust for compr
 
 ### Why LLM Test Bench?
 
-- **🚀 Multi-Provider Support**: Test 14+ LLM providers with 69+ models through a single, unified interface
+- **🚀 Multi-Provider Support**: Test 14+ LLM providers with 65 models through a single, unified interface
 - **🆕 Latest Models**: Full support for GPT-5, Claude Opus 4, Gemini 2.5, and all 2025 releases
 - **📊 Comprehensive Metrics**: Evaluate models with perplexity, coherence, relevance, faithfulness, and custom evaluators
 - **⚡ High Performance**: Built in Rust for speed, safety, and scalability
@@ -37,7 +37,7 @@ LLM Test Bench is a powerful, enterprise-grade framework built in Rust for compr
 
 #### 🤖 Multi-Provider LLM Support
 
-**OpenAI (29+ models)**
+**OpenAI (27 models)**
 - **GPT-5** (Latest generation, Aug 2025)
 - **GPT-4.5** (Feb 2025) - Enhanced capabilities
 - **GPT-4.1** (Apr 2025) - Improved performance
@@ -46,21 +46,21 @@ LLM Test Bench is a powerful, enterprise-grade framework built in Rust for compr
 - GPT-4 Turbo, GPT-4 (128K context)
 - GPT-3.5 Turbo
 
-**Anthropic (17+ models)**
+**Anthropic (15 models)**
 - **Claude Opus 4** (May 2025 - Most capable)
 - **Claude Sonnet 4.5** (Sept 2025 - Latest flagship)
 - **Claude Sonnet 4** (May 2025)
 - Claude 3.5 Sonnet, Claude 3.5 Haiku
 - Claude 3 Opus, Sonnet, Haiku (200K context)
 
-**Google Gemini (16+ models)**
+**Google Gemini (16 models)**
 - **Gemini 2.5 Pro** (2025 - Latest generation)
 - **Gemini 2.5 Computer Use** (Oct 2025 - Autonomous agent capabilities)
 - Gemini 2.0 Flash (Extended thinking)
 - Gemini 1.5 Pro, Flash (2M+ token context)
 - Gemini Pro Vision (Multimodal)
 
-**Mistral AI (7+ models)**
+**Mistral AI (7 models)**
 - **Mistral Code** (Jun 2025 - Code-specialized)
 - **Magistral Family** (Jun 2025 - Large, Medium, Small)
 - **Voxtral Small** (Jul 2025 - Audio model)
