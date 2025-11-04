@@ -1,487 +1,403 @@
-# LLM Test Bench
+<div align="center">
 
-A production-grade CLI framework for systematic testing, validation, and benchmarking of Large Language Model (LLM) applications.
+# 🧪 LLM Test Bench
 
-## Status
+**A comprehensive, production-ready framework for benchmarking, testing, and evaluating Large Language Models**
 
-[![CI](https://github.com/USERNAME/llm-test-bench/actions/workflows/ci.yml/badge.svg)](https://github.com/USERNAME/llm-test-bench/actions/workflows/ci.yml)
-[![Security](https://github.com/USERNAME/llm-test-bench/actions/workflows/security.yml/badge.svg)](https://github.com/USERNAME/llm-test-bench/actions/workflows/security.yml)
-[![codecov](https://codecov.io/gh/USERNAME/llm-test-bench/branch/main/graph/badge.svg)](https://codecov.io/gh/USERNAME/llm-test-bench)
+[![CI](https://img.shields.io/github/actions/workflow/status/globalbusinessadvisors/llm-test-bench/llm-benchmark.yml?branch=main&label=CI&logo=github)](https://github.com/globalbusinessadvisors/llm-test-bench/actions)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Rust Version](https://img.shields.io/badge/rust-1.75%2B-blue.svg)](https://www.rust-lang.org)
+[![Crates.io](https://img.shields.io/badge/crates.io-v0.1.0-orange)](https://crates.io)
 
-**Current Phase**: Phase 2 - Provider Integration ✅ (Milestone 2.4 Complete)
+[Features](#-features) • [Quick Start](#-quick-start) • [Documentation](#-documentation) • [Architecture](#-architecture) • [Contributing](#-contributing)
 
-A production-ready CLI for testing and benchmarking LLM applications with support for OpenAI and Anthropic providers. The test command is now fully functional with streaming support, multiple output formats, and comprehensive error handling.
+</div>
 
-## Architecture Documentation
+---
 
-### Core Documents (Start Here)
+## 📖 Overview
 
-1. **[ARCHITECTURE.md](./ARCHITECTURE.md)** (73KB)
-   - Complete system architecture overview
-   - All major components detailed
-   - Interface specifications
-   - Security and scalability considerations
-   - **READ THIS FIRST**
+LLM Test Bench is a powerful, enterprise-grade framework built in Rust for comprehensive testing, benchmarking, and evaluation of Large Language Models. It provides a unified interface to test multiple LLM providers, evaluate responses with sophisticated metrics, and visualize results through an intuitive dashboard.
 
-2. **[ARCHITECTURE_DIAGRAMS.md](./ARCHITECTURE_DIAGRAMS.md)** (41KB)
-   - Visual component diagrams
-   - Data flow diagrams
-   - Sequence diagrams
-   - System layer architecture
-   - **Great for visual learners**
+### Why LLM Test Bench?
 
-3. **[IMPLEMENTATION_ROADMAP.md](./IMPLEMENTATION_ROADMAP.md)** (27KB)
-   - 15-week phased implementation plan
-   - Week-by-week breakdown
-   - Code examples for each phase
-   - Deliverables and milestones
-   - **For developers ready to build**
+- **🚀 Multi-Provider Support**: Test 14+ LLM providers through a single, unified interface
+- **📊 Comprehensive Metrics**: Evaluate models with perplexity, coherence, relevance, faithfulness, and custom evaluators
+- **⚡ High Performance**: Built in Rust for speed, safety, and scalability
+- **🎨 Rich Visualization**: Interactive dashboards with real-time metrics and beautiful charts
+- **🔌 Extensible**: Plugin system, custom evaluators, and distributed computing support
+- **🐳 Production Ready**: Docker support, monitoring, REST/GraphQL APIs, and WebSocket streaming
 
-4. **[DESIGN_DECISIONS.md](./DESIGN_DECISIONS.md)** (20KB)
-   - Why we made key architectural choices
-   - Technology selection rationale
-   - Trade-offs and alternatives considered
-   - Design patterns applied
-   - **Understand the "why"**
+---
 
-5. **[QUICK_REFERENCE.md](./QUICK_REFERENCE.md)** (11KB)
-   - Cheat sheet for developers
-   - Common patterns and examples
-   - CLI commands reference
-   - Troubleshooting guide
-   - **Keep this handy while coding**
+## ✨ Features
 
-### Market Research
+### Core Capabilities
 
-6. **[MARKET_RESEARCH_REPORT.md](./MARKET_RESEARCH_REPORT.md)** (44KB)
-   - Competitive analysis
-   - Market landscape
-   - User needs and pain points
-   - Feature comparison
+#### 🤖 Multi-Provider LLM Support
+- **OpenAI**: GPT-4, GPT-3.5-Turbo, GPT-4-Turbo
+- **Anthropic**: Claude 3 (Opus, Sonnet, Haiku), Claude 3.5 Sonnet
+- **Google**: Gemini Pro, Gemini Pro Vision
+- **Azure OpenAI**: Enterprise-grade OpenAI models
+- **AWS Bedrock**: Claude, Llama, Titan, and more
+- **Open Source**: Ollama, Hugging Face, Together AI, Replicate
+- **Specialized**: Cohere, Mistral AI, Groq, Perplexity AI
 
-7. **[MARKET_INSIGHTS_SUPPLEMENT.md](./MARKET_INSIGHTS_SUPPLEMENT.md)** (26KB)
-   - Additional market insights
-   - Pricing strategies
-   - Go-to-market analysis
+#### 📈 Advanced Evaluation Metrics
+- **Perplexity Analysis**: Statistical language model evaluation
+- **Coherence Scoring**: Semantic consistency and logical flow
+- **Relevance Evaluation**: Context-aware response quality
+- **Faithfulness Testing**: Source attribution and hallucination detection
+- **LLM-as-Judge**: Use LLMs to evaluate other LLMs
+- **Text Analysis**: Readability, sentiment, toxicity, PII detection
+- **Custom Evaluators**: Build your own evaluation metrics
 
-8. **[EXECUTIVE_SUMMARY.md](./EXECUTIVE_SUMMARY.md)** (9.6KB)
-   - High-level overview
-   - Key value propositions
-   - Target audience
+#### 🎯 Benchmarking & Testing
+- **Systematic Testing**: Automated test suites with rich assertions
+- **Comparative Analysis**: Side-by-side model comparison
+- **Performance Profiling**: Latency, throughput, and cost tracking
+- **A/B Testing**: Statistical significance testing for model selection
+- **Optimization Tools**: Automatic parameter tuning and model recommendation
 
-## Quick Start (For Reviewers)
+#### 📊 Visualization & Reporting
+- **Interactive Dashboard**: Real-time metrics with Chart.js
+- **Rich Charts**: Performance graphs, cost analysis, trend visualization
+- **Multiple Formats**: HTML reports, JSON exports, custom templates
+- **Cost Analysis**: Track spending across providers and models
+- **Historical Trends**: Long-term performance tracking
 
-### 1. Understand the Vision (5 minutes)
-```bash
-# Read the executive summary
-cat EXECUTIVE_SUMMARY.md
-```
+#### 🌐 API & Integration
+- **REST API**: Complete HTTP API with authentication
+- **GraphQL**: Flexible query interface for complex data needs
+- **WebSocket**: Real-time streaming and live updates
+- **Monitoring**: Prometheus metrics and health checks
+- **Distributed Computing**: Scale benchmarks across multiple nodes
 
-### 2. Learn the Architecture (30 minutes)
-```bash
-# Read the main architecture document
-cat ARCHITECTURE.md
+#### 🔌 Extensibility
+- **Plugin System**: WASM-based sandboxed plugins
+- **Custom Evaluators**: Implement domain-specific metrics
+- **Multimodal Support**: Image, audio, and video evaluation
+- **Database Backend**: PostgreSQL with repository pattern
+- **Flexible Architecture**: Clean, modular design for easy extension
 
-# View the visual diagrams
-cat ARCHITECTURE_DIAGRAMS.md
-```
+---
 
-### 3. See How to Build It (20 minutes)
-```bash
-# Review the implementation roadmap
-cat IMPLEMENTATION_ROADMAP.md
-```
-
-### 4. Understand the Decisions (15 minutes)
-```bash
-# Read design decisions
-cat DESIGN_DECISIONS.md
-```
-
-## Document Map
-
-```
-LLM Test Bench Documentation
-│
-├── README.md (You are here)
-│
-├── Architecture (Core)
-│   ├── ARCHITECTURE.md ...................... Complete system design
-│   ├── ARCHITECTURE_DIAGRAMS.md ............. Visual diagrams
-│   └── QUICK_REFERENCE.md ................... Developer cheat sheet
-│
-├── Implementation
-│   ├── IMPLEMENTATION_ROADMAP.md ............ 15-week build plan
-│   └── DESIGN_DECISIONS.md .................. Why we chose this
-│
-└── Market Research
-    ├── MARKET_RESEARCH_REPORT.md ............ Competitive analysis
-    ├── MARKET_INSIGHTS_SUPPLEMENT.md ........ Additional insights
-    └── EXECUTIVE_SUMMARY.md ................. High-level overview
-```
-
-## Key Features (Designed)
-
-### 1. Multi-Provider Support
-- OpenAI (GPT-4, GPT-3.5)
-- Anthropic (Claude)
-- Local models (Ollama, LM Studio)
-- Custom providers via plugins
-
-### 2. Rich Assertion Library
-- Exact match
-- Contains substring
-- Regex patterns
-- JSON schema validation
-- Semantic similarity
-- Custom assertions
-
-### 3. Flexible Configuration
-- YAML/JSON/TOML support
-- Hierarchical config merging
-- Environment variable interpolation
-- Vault integration for secrets
-
-### 4. Advanced Execution
-- Parallel test execution
-- Content-based caching
-- Rate limiting
-- Automatic retries
-- Streaming support
-
-### 5. Comprehensive Reporting
-- JSON, HTML, Markdown formats
-- JUnit XML for CI/CD
-- Historical comparison
-- Metrics dashboard
-- Cost tracking
-
-### 6. Developer Experience
-- Intuitive CLI
-- Excellent error messages
-- Interactive mode
-- Watch mode
-- Hot reload
-
-## Technology Stack
-
-- **Runtime**: Node.js 18+
-- **Language**: TypeScript
-- **CLI**: yargs
-- **Validation**: Zod
-- **Testing**: Vitest
-- **Build**: tsup
-
-## Architecture Highlights
-
-### Clean Architecture
-- Dependency inversion
-- Domain-driven design
-- Plugin-based extensibility
-
-### Security First
-- No secrets in configs
-- Sandboxed custom code
-- Comprehensive audit logging
-
-### Performance Optimized
-- Two-level caching (memory + disk)
-- Connection pooling
-- Parallel execution
-- Streaming responses
-
-## Implementation Phases
-
-1. **Phase 0**: Project foundation (Week 1)
-2. **Phase 1**: Core foundation (Weeks 2-3)
-3. **Phase 2**: Assertion engine (Weeks 4-5)
-4. **Phase 3**: Test discovery & orchestration (Week 6)
-5. **Phase 4**: Advanced features (Weeks 7-8)
-6. **Phase 5**: Additional providers (Week 9)
-7. **Phase 6**: Advanced assertions (Week 10)
-8. **Phase 7**: Enhanced reporting (Week 11)
-9. **Phase 8**: Plugin system (Week 12)
-10. **Phase 9**: Polish & production ready (Weeks 13-14)
-11. **Phase 10**: Launch (Week 15)
-
-## Quick Start
+## 🚀 Quick Start
 
 ### Prerequisites
 
-1. Install Rust (1.75.0 or later)
-2. Set up API keys:
-   ```bash
-   export OPENAI_API_KEY="your-key-here"
-   export ANTHROPIC_API_KEY="your-key-here"
-   ```
+- **Rust**: 1.75.0 or later ([Install Rust](https://rustup.rs/))
+- **API Keys**: At least one LLM provider API key
 
 ### Installation
 
 ```bash
 # Clone the repository
-git clone https://github.com/USERNAME/llm-test-bench
+git clone https://github.com/globalbusinessadvisors/llm-test-bench.git
 cd llm-test-bench
 
 # Build the project
 cargo build --release
 
-# Install (optional)
+# Install CLI globally (optional)
 cargo install --path cli
+```
+
+### Configuration
+
+Set up your API keys as environment variables:
+
+```bash
+# OpenAI
+export OPENAI_API_KEY="sk-..."
+
+# Anthropic
+export ANTHROPIC_API_KEY="sk-ant-..."
+
+# Google
+export GOOGLE_API_KEY="..."
+
+# AWS Bedrock
+export AWS_ACCESS_KEY_ID="..."
+export AWS_SECRET_ACCESS_KEY="..."
+export AWS_REGION="us-east-1"
+```
+
+Or create a `.env` file:
+
+```bash
+cp .env.example .env
+# Edit .env with your API keys
 ```
 
 ### Basic Usage
 
 ```bash
-# Test with OpenAI
-llm-test-bench test openai --prompt "Explain Rust ownership"
+# Run a simple benchmark
+llm-test-bench bench --provider openai --model gpt-4 --prompt "Explain quantum computing"
 
-# Test with Anthropic Claude
-llm-test-bench test anthropic --prompt "Write a haiku about programming"
+# Compare multiple models
+llm-test-bench compare \
+  --models "openai:gpt-4,anthropic:claude-3-sonnet" \
+  --prompt "Write a Python function to sort a list"
 
-# Stream responses in real-time
-llm-test-bench test openai --prompt "Write a story" --stream
+# Analyze results
+llm-test-bench analyze --results benchmark_results.json
 
-# Get JSON output for scripting
-llm-test-bench test openai --prompt "What is 2+2?" --output-format json
+# Launch interactive dashboard
+llm-test-bench dashboard --port 8080
 
-# Use specific models and parameters
-llm-test-bench test openai \
-  --prompt "Generate a random number" \
-  --model gpt-4 \
-  --temperature 1.5 \
-  --max-tokens 50
-
-# Initialize configuration
-llm-test-bench config init
-
-# View current configuration
-llm-test-bench config show
+# Optimize model selection
+llm-test-bench optimize \
+  --metric latency \
+  --max-cost 0.01 \
+  --dataset prompts.json
 ```
 
-### Example Usage Scenarios
-
-#### 1. Quick Testing
-```bash
-llm-test-bench test openai --prompt "Hello, world!" --output-format plain
-```
-
-#### 2. Streaming Mode
-```bash
-llm-test-bench test anthropic \
-  --prompt "Write a short story" \
-  --model claude-3-sonnet-20240229 \
-  --stream
-```
-
-#### 3. JSON Output for Automation
-```bash
-llm-test-bench test openai \
-  --prompt "List 5 programming languages" \
-  --output-format json | jq '.content'
-```
-
-#### 4. Advanced Parameters
-```bash
-llm-test-bench test openai \
-  --prompt "Generate creative text" \
-  --model gpt-4-turbo \
-  --temperature 1.2 \
-  --top-p 0.95 \
-  --max-tokens 200 \
-  --stop "END"
-```
-
-### Available Commands
-
-| Command | Description |
-|---|---|
-| `test` | Run a single test against an LLM provider |
-| `bench` | Run benchmarks (coming in Phase 3) |
-| `eval` | Evaluate test results (coming in Phase 4) |
-| `config init` | Initialize configuration file |
-| `config show` | Display current configuration |
-| `completions <shell>` | Generate shell completions |
-
-### Output Formats
-
-- **pretty** (default): Human-readable with colors and formatting
-- **json**: Compact JSON for piping
-- **json-pretty**: Pretty-printed JSON
-- **plain**: Just the content text
-
-### Supported Providers
-
-#### OpenAI
-- ✅ GPT-4 (8K context)
-- ✅ GPT-4 Turbo (128K context)
-- ✅ GPT-3.5 Turbo (16K context)
-
-#### Anthropic
-- ✅ Claude 3 Opus (200K context)
-- ✅ Claude 3 Sonnet (200K context)
-- ✅ Claude 3 Haiku (200K context)
-- ✅ Claude 3.5 Sonnet (200K context)
-
-## Configuration Example
-
-```yaml
-# ltb.config.yaml
-version: "1.0"
-name: "My Test Suite"
-
-providers:
-  openai:
-    type: openai
-    apiKey: ${env:OPENAI_API_KEY}
-    defaults:
-      model: gpt-4
-      temperature: 0.7
-
-  anthropic:
-    type: anthropic
-    apiKey: ${env:ANTHROPIC_API_KEY}
-    defaults:
-      model: claude-sonnet-4
-
-tests:
-  include:
-    - "tests/**/*.test.yaml"
-
-cache:
-  enabled: true
-  ttl: 3600
-
-reporting:
-  formats: ["json", "html"]
-  output: "./reports"
-```
-
-## Design Principles
-
-1. **Developer Experience First** - Intuitive, helpful, delightful
-2. **Correctness over Performance** - Get it right, then make it fast
-3. **Security by Default** - Safe out of the box
-4. **Extensibility** - Plugin architecture for everything
-5. **Convention over Configuration** - Smart defaults, minimal setup
-6. **Fail-Fast with Graceful Degradation** - Catch errors early, recover gracefully
-
-## Project Status
-
-### Phase 2: Provider Integration ✅
-
-- [x] **Phase 1: Project Foundation** ✅
-  - [x] Cargo workspace structure
-  - [x] Configuration system with validation
-  - [x] CLI scaffolding with clap
-  - [x] Error handling infrastructure
-  - [x] Basic documentation
-
-- [x] **Phase 2: Provider Integration** ✅
-  - [x] **Milestone 2.1**: Provider trait abstraction
-  - [x] **Milestone 2.2**: OpenAI integration (complete + streaming)
-  - [x] **Milestone 2.3**: Anthropic integration (complete + streaming)
-  - [x] **Milestone 2.4**: CLI test command ✅ **LATEST**
-    - [x] Provider factory implementation
-    - [x] Streaming UI with progress indicators
-    - [x] 4 output formats (Pretty, JSON, JsonPretty, Plain)
-    - [x] User-friendly error messages
-    - [x] 25+ integration tests
-    - [x] Complete documentation
-
-- [ ] **Phase 3: Benchmarking System** (Next)
-- [ ] **Phase 4: Evaluation Metrics**
-- [ ] **Phase 5: Advanced Features**
-
-📄 **See [docs/milestone-2.4-implementation-report.md](./docs/milestone-2.4-implementation-report.md) for complete Phase 2.4 details**
-
-## CI/CD Pipeline
-
-The project includes a production-ready CI/CD pipeline with:
-
-- **Continuous Integration**: Automated testing, linting, and type checking on every PR
-- **Security Scanning**: Daily vulnerability scans and secret detection
-- **Code Coverage**: 80% minimum coverage enforced (target: 90%)
-- **Automated Releases**: Tag-based releases with automatic npm publishing
-- **Quality Gates**: Zero warnings policy, strict type checking, format verification
-
-📚 **See [docs/CI_CD.md](./docs/CI_CD.md) for complete documentation**
-
-### Quick Commands
+### Docker Deployment
 
 ```bash
-# Run all CI checks locally
-npm run ci
+# Using Docker Compose (includes PostgreSQL, Redis, Prometheus)
+docker-compose up -d
 
-# Individual checks
-npm run lint          # ESLint with zero warnings
-npm run typecheck     # TypeScript validation
-npm test              # Run test suite
-npm run test:coverage # Generate coverage report
-npm run format:check  # Verify formatting
-npm run build         # Build package
+# Access the dashboard
+open http://localhost:8080
 
-# Or use Makefile shortcuts
-make ci               # Run all checks
-make test             # Run tests
-make coverage         # Generate and open coverage report
+# View metrics
+open http://localhost:9090  # Prometheus
 ```
-
-## Contributing
-
-We welcome contributions! Please read our [Contributing Guide](./CONTRIBUTING.md) for:
-
-- Development setup and workflow
-- Code quality standards
-- Testing requirements
-- PR submission process
-- Commit message conventions
-
-### For Contributors
-
-1. Read [CONTRIBUTING.md](./CONTRIBUTING.md)
-2. Review [docs/CI_CD.md](./docs/CI_CD.md) for CI/CD pipeline details
-3. Follow [docs/GITHUB_ACTIONS_SETUP.md](./docs/GITHUB_ACTIONS_SETUP.md) for setup
-4. Write tests first (TDD approach)
-5. Ensure all CI checks pass: `npm run ci`
-6. Submit PR with clear description
-
-## License
-
-MIT License - See LICENSE file
-
-## Author
-
-Systems Architect: Claude (Anthropic)
 
 ---
 
-**Note**: This is an architectural design. Implementation follows the roadmap in IMPLEMENTATION_ROADMAP.md.
+## 📚 Documentation
 
-## Next Steps
+### Getting Started
+- [Quick Start Guide](docs/QUICKSTART_PHASE4.md) - Get up and running in 5 minutes
+- [CLI Reference](docs/CLI_REFERENCE.md) - Complete command-line documentation
+- [Configuration Guide](docs/CONFIGURATION.md) - Advanced configuration options
 
-### For Architects/Reviewers
-1. Review ARCHITECTURE.md for completeness
-2. Validate design decisions in DESIGN_DECISIONS.md
-3. Assess feasibility of IMPLEMENTATION_ROADMAP.md
+### Architecture & Design
+- [Architecture Overview](docs/ARCHITECTURE_REPORT.md) - System design and components
+- [Workspace Structure](docs/WORKSPACE_STRUCTURE.md) - Project organization
+- [Technical Architecture](plans/PHASE5_TECHNICAL_ARCHITECTURE.md) - Deep dive into design
 
-### For Developers
-1. Read all architecture docs
-2. Set up development environment (Phase 0)
-3. Start with Phase 1: Core foundation
-4. Follow TDD approach
-5. Submit PRs incrementally
+### Features
+- [Provider Support](docs/PROVIDERS.md) - All supported LLM providers
+- [API Documentation](docs/API.md) - REST & GraphQL API reference
+- [Monitoring](docs/MONITORING.md) - Observability and metrics
+- [Distributed Computing](docs/DISTRIBUTED.md) - Scaling across nodes
+- [Multimodal](docs/MULTIMODAL.md) - Image, audio, and video support
+- [Plugins](docs/PLUGINS.md) - Extensibility and custom plugins
 
-### For Product Managers
-1. Review EXECUTIVE_SUMMARY.md
-2. Read MARKET_RESEARCH_REPORT.md
-3. Validate feature priorities
-4. Define success metrics
+### Deployment
+- [Docker Deployment](docs/DOCKER_DEPLOYMENT.md) - Containerized deployment guide
+- [Database Setup](docs/DATABASE.md) - PostgreSQL configuration
+
+### Development
+- [Phase Implementation Reports](docs/) - Detailed implementation history
+- [Contributing Guide](CONTRIBUTING.md) - How to contribute
+- [Development Setup](docs/DEVELOPMENT.md) - Set up your dev environment
 
 ---
 
-**Total Documentation**: ~250KB of comprehensive architectural design
+## 🏗️ Architecture
 
-**Time to Implementation**: ~15 weeks for v1.0
+LLM Test Bench follows a clean, modular architecture:
 
-**Designed for**: Production-grade LLM testing at scale
+```
+┌─────────────────────────────────────────────────────────────┐
+│                        CLI Layer                            │
+│  bench │ compare │ analyze │ dashboard │ optimize          │
+└─────────────────────────────────────────────────────────────┘
+                              │
+┌─────────────────────────────────────────────────────────────┐
+│                     Core Library (core/)                    │
+├─────────────────────────────────────────────────────────────┤
+│  • Providers      • Evaluators     • Orchestration          │
+│  • Analytics      • Visualization  • Monitoring             │
+│  • Distributed    • Plugins        • Multimodal             │
+│  • API Server     • Database       • Configuration          │
+└─────────────────────────────────────────────────────────────┘
+                              │
+┌─────────────────────────────────────────────────────────────┐
+│                    External Services                        │
+│  LLM APIs │ PostgreSQL │ Redis │ Prometheus │ S3            │
+└─────────────────────────────────────────────────────────────┘
+```
+
+### Key Components
+
+- **Providers**: Unified interface for 14+ LLM providers
+- **Evaluators**: Pluggable metrics for response quality assessment
+- **Orchestration**: Intelligent routing, ranking, and comparison
+- **Visualization**: Interactive dashboards and rich reporting
+- **API Server**: REST, GraphQL, and WebSocket endpoints
+- **Distributed**: Cluster coordination for large-scale benchmarks
+- **Monitoring**: Prometheus metrics and health checks
+- **Plugins**: WASM-based extensibility system
+
+---
+
+## 🛠️ Technology Stack
+
+- **Language**: Rust 🦀
+- **CLI**: Clap (command-line parsing)
+- **Async**: Tokio (async runtime)
+- **HTTP**: Axum (web framework)
+- **Database**: SQLx + PostgreSQL
+- **Serialization**: Serde (JSON/YAML)
+- **GraphQL**: Async-GraphQL
+- **Monitoring**: Prometheus client
+- **WebSocket**: Tokio-Tungstenite
+- **Distributed**: Custom protocol over TCP
+- **Plugins**: Wasmtime (WASM runtime)
+
+---
+
+## 📦 Project Structure
+
+```
+llm-test-bench/
+├── cli/                    # Command-line interface
+│   ├── src/
+│   │   ├── commands/      # CLI commands (bench, compare, etc.)
+│   │   └── main.rs
+│   └── tests/             # Integration tests
+├── core/                   # Core library
+│   ├── src/
+│   │   ├── providers/     # LLM provider implementations
+│   │   ├── evaluators/    # Evaluation metrics
+│   │   ├── orchestration/ # Model routing & comparison
+│   │   ├── visualization/ # Dashboard & charts
+│   │   ├── api/           # REST/GraphQL/WebSocket
+│   │   ├── distributed/   # Cluster coordination
+│   │   ├── monitoring/    # Metrics & health checks
+│   │   ├── plugins/       # Plugin system
+│   │   ├── multimodal/    # Image/audio/video
+│   │   ├── analytics/     # Statistics & optimization
+│   │   └── config/        # Configuration
+│   └── tests/             # Unit & integration tests
+├── docs/                   # Documentation
+├── examples/               # Usage examples
+├── plans/                  # Architecture & planning docs
+└── docker-compose.yml      # Docker deployment
+```
+
+---
+
+## 🎯 Use Cases
+
+### 1. Model Selection
+Compare multiple LLM providers to choose the best model for your use case based on quality, cost, and latency.
+
+### 2. Quality Assurance
+Systematic testing of LLM applications with rich assertions and automated evaluation metrics.
+
+### 3. Performance Benchmarking
+Measure and track latency, throughput, and cost across different models and configurations.
+
+### 4. Regression Testing
+Ensure model updates don't degrade quality with historical comparison and automated alerts.
+
+### 5. Cost Optimization
+Identify the most cost-effective model that meets your quality requirements.
+
+### 6. Research & Experimentation
+Rapid prototyping and comparison of different prompts, models, and parameters.
+
+---
+
+## 🤝 Contributing
+
+We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) for details.
+
+### Development Setup
+
+```bash
+# Clone and build
+git clone https://github.com/globalbusinessadvisors/llm-test-bench.git
+cd llm-test-bench
+cargo build
+
+# Run tests
+cargo test
+
+# Run with logging
+RUST_LOG=debug cargo run -- bench --help
+
+# Format code
+cargo fmt
+
+# Lint
+cargo clippy -- -D warnings
+```
+
+### Areas for Contribution
+
+- 🔌 New LLM provider integrations
+- 📊 Additional evaluation metrics
+- 🎨 Visualization improvements
+- 📝 Documentation enhancements
+- 🐛 Bug fixes and performance improvements
+- ✨ New features and capabilities
+
+---
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+---
+
+## 🙏 Acknowledgments
+
+- Built with [Rust](https://www.rust-lang.org/) 🦀
+- Inspired by the need for comprehensive LLM testing tools
+- Thanks to all contributors and the open-source community
+
+---
+
+## 📞 Support
+
+- **Issues**: [GitHub Issues](https://github.com/globalbusinessadvisors/llm-test-bench/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/globalbusinessadvisors/llm-test-bench/discussions)
+- **Documentation**: [docs/](docs/)
+
+---
+
+## 🗺️ Roadmap
+
+### Completed ✅
+- ✅ Multi-provider LLM support (14+ providers)
+- ✅ Advanced evaluation metrics
+- ✅ Visualization dashboard
+- ✅ REST/GraphQL/WebSocket APIs
+- ✅ Distributed computing
+- ✅ Monitoring & observability
+- ✅ Plugin system
+- ✅ Docker deployment
+- ✅ PostgreSQL backend
+
+### In Progress 🚧
+- 🚧 Enhanced multimodal support
+- 🚧 Advanced cost optimization
+- 🚧 Plugin marketplace
+- 🚧 Cloud deployment templates
+
+### Planned 📋
+- 📋 Real-time collaboration features
+- 📋 Advanced A/B testing framework
+- 📋 Integration with MLOps platforms
+- 📋 Enterprise SSO and RBAC
+
+---
+
+<div align="center">
+
+**⭐ Star us on GitHub — it motivates us a lot!**
+
+[Report Bug](https://github.com/globalbusinessadvisors/llm-test-bench/issues) • [Request Feature](https://github.com/globalbusinessadvisors/llm-test-bench/issues) • [Documentation](docs/)
+
+Made with ❤️ by the LLM Test Bench Team
+
+</div>
